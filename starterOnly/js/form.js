@@ -6,99 +6,20 @@ function main() {
 main();
 
 
-// 1/ vérifier les autres champs
-// 2/ vérifier l'émail avec un regexp
-// 3/ Ajouter un évenement pour que à chaque saisie on contrôle les champs (BLUR)
 
-// DOM Elements
-/*
-const FORM_DATA = document.querySelectorAll(".formData");
-
-function inti_event() {
-	const btnSubmit= document.querySelectorAll(".btn-submit");
-	btnSubmit.forEach((btn) => btn.addEventListener("click",(e)=>submitForm(e)));
-
-}
-
-function submitForm(event) {
-	event.preventDefault();
-	console.log('submitForm');
-
-	if( checkInputFirstName()==true) {
-		console.log('Il y a une erreur');
-		return;
-	}
-
-	console.log('OK');
-}
-
-function checkInputFirstName() {
-	let isError=false;
-	let input=document.getElementById('first');
-	
-	removeError(input);
-
-	if(input.value=="" || input.value.length < 5) {
-		setError(input,'Merci de corriger le prénom');
-		isError=true;
-	}
-
-	return isError;
-
-}
-
-function setError(input, message) {
-	let inputParent= input.parentElement;
-	inputParent.setAttribute('data-error', message);
-	inputParent.setAttribute('data-error-visible', 'true');
-}
-
-function removeError(input) {
-	let inputParent= input.parentElement;
-	inputParent.setAttribute('data-error', '');
-	inputParent.setAttribute('data-error-visible', 'false');
-}
-
-
-function main() {
-	inti_event();
-}
-
-main();*/
-
-
-/*
-const first = document.getElementById("first")
-const last = document.getElementById("last")
-const email = document.getElementById("email")
-
-const form = document.getElementById("form")
-const error = document.getElementById("error")
-
-
-	const prev = form.addEventListener("submit",  (e) => {
-	e.preventDefault()
-})
-
-if (first.value === "" || first.value == null) {
-	error.value = "Une erreur"
-	prev()
-}
-
-if (first.length < 5) {
-	error.value = "Une erreur"
-	console.log("plus")
-	prev()
-}
-*/
-
+// Fonction pour vérifier le champ du prénom
 
 function checkFirstName() {
 	return checkInput("first", "Le prénom est incorrect")
 }
+
+// Fonction pour vérifier le champ du nom de famille
+
 function checkLastName() {
 	return checkInput("last", "Le nom est incorrect")
 }
+
+// Fonction pour vérifier le champ de la date de naissance
 
 function checkBirthdate() {
 	const input = document.getElementById('birthdate')
@@ -107,9 +28,7 @@ function checkBirthdate() {
 	if (input.value === "" || input.value == null || input.value.length != 10) {
 		input.focus();
 		showMessageError(input, 'La date de naissance n\'est pas valide');
-		/*const first = document.getElementById("first")
-		first.style.borderColor = 'red';
-		errorFirst.textContent = 'Please enter at least 2 alphabetical characters.'; */
+
 		return false;
 	}
 	if (!isDateValid(input.value)) {
@@ -122,9 +41,13 @@ function checkBirthdate() {
 
 }
 
+// Fonction pour vérifier si une date est valide
+
 function isDateValid(dateStr) {
 	return !isNaN(new Date(dateStr));
 }
+
+// Fonction pour vérifier si l'utilisateur est majeur en fonction de sa date de naissance
 
 function isAdult(birthdateId) {
 	const birthdate = document.getElementById(birthdateId);
@@ -155,6 +78,8 @@ function isAdult(birthdateId) {
 	return true;
 }
 
+// Fonction pour vérifier le champ de l'e-mail
+
 function checkEmail() {
 	let retour = checkInput("email", "Le mail est incorrect")
 	if (!retour) {
@@ -174,6 +99,7 @@ function checkCGU() {
 	return true;
 }
 
+// Fonction pour vérifier si une valeur d'entrée est valide
 
 function checkInput(inputId, errorMessage) {
 	const input = document.getElementById(inputId)
@@ -188,6 +114,8 @@ function checkInput(inputId, errorMessage) {
 	return true;
 }
 
+// Fonction pour vérifier si un e-mail est valide
+
 function isMail(inputId, errorMessage) {
 	const input = document.getElementById(inputId);
 	hideMessageError(input);
@@ -199,10 +127,13 @@ function isMail(inputId, errorMessage) {
 	return true;
 }
 
+// Fonction pour vérifier le champ de la quantité
 
 function checkQuantity() {
 	return quantityValue("quantity", "La quantité est incorrect")
 }
+
+// Fonction pour vérifier la valeur du champ de la quantité
 
 function quantityValue(inputId, errorMessage) {
 	const input = document.getElementById(inputId)
@@ -216,6 +147,8 @@ function quantityValue(inputId, errorMessage) {
 	}
 	return true;
 }
+
+// Fonction pour vérifier si une localisation est sélectionnée
 
 function checkLocation() {
     const radios = document.getElementsByName('location');
@@ -231,6 +164,8 @@ function checkLocation() {
     return checked;
 }
 
+// Fonction pour afficher un message d'erreur si aucune localisation n'est sélectionnée
+
 function locationError(inputId, errorMessage,locationsSelected) {
     const input = document.getElementById(inputId);
     if (!locationsSelected) {
@@ -241,7 +176,7 @@ function locationError(inputId, errorMessage,locationsSelected) {
 
 
 
-
+// Fonction pour vérifier l'ensemble du formulaire
 
 function checkForm() {
 	if (checkFirstName() && checkLastName() && checkEmail() && checkBirthdate() && checkQuantity()   && checkLocation() && checkCGU()) {
@@ -249,10 +184,9 @@ function checkForm() {
 	} else {
 		enabledBtnSubmit(false);
 	}
-
-
-
 }
+
+// Fonction pour initialiser les événements du formulaire
 
 function initEvent() {
 	const first = document.getElementById("first")
@@ -271,10 +205,7 @@ function initEvent() {
 	quantity.addEventListener("change", checkForm);
 
 	const radioBtns = document.getElementsByName('location');
-    radioBtns.forEach(btn => btn.addEventListener("change", checkForm)); // Use "change" event for radio buttons
-
-	/*const radioBtn = document.getElementsByName('location');
-	radioBtn.addEventListener("keyup", checkForm) */
+    radioBtns.forEach(btn => btn.addEventListener("change", checkForm)); 
 
 	const checkbox = document.getElementById("checkbox1")
 	checkbox.addEventListener("click", checkForm)
@@ -282,48 +213,60 @@ function initEvent() {
 	const form = document.getElementById("form_submit")
 
 	form.addEventListener("click", (e) => {
-		validForm(e);
+		validForm(e); // Valider le formulaire lors du clic sur le bouton de soumission
 	})
 
 }
 
+// Fonction pour valider le formulaire
+
 function validForm(e) {
-	e.preventDefault();
+	e.preventDefault(); // Empêcher le comportement par défaut du formulaire
 	console.log('Formulaire validé');
 
 	let form=document.getElementsByName('reserve');
 	let messageValidateForm=document.getElementById('messageValidateForm');
-	form[0].reset()
-	form[0].style.display = "none";
-	messageValidateForm.style.display = "block";
+	form[0].reset() // Réinitialiser le formulaire après la soumission
+	form[0].style.display = "none"; // Masquer le formulaire après la soumission
+	messageValidateForm.style.display = "block"; // Afficher un message de validation du formulaire
 
 }
+
+
+// Fonction pour initialiser le formulaire
 
 function initForm() {
-	enabledBtnSubmit(false);
+	enabledBtnSubmit(false); // Désactiver le bouton de soumission au chargement de la page
 }
+
+
+// Fonction pour activer ou désactiver le bouton de soumission
 
 function enabledBtnSubmit(isEnabled) {
 	const btn = document.querySelector(".btn-submit");
 	if (isEnabled) {
-		// Button is enabled
+		// Le bouton est activé
 		btn.disabled = false;
-		btn.style.backgroundColor = 'red'; // Set your desired enabled color
+		btn.style.backgroundColor = 'red'; 
 	} else {
-		// Button is disabled
+		// Le bouton est désactivé
 		btn.disabled = true;
-		btn.style.backgroundColor = 'grey'; // Set your desired disabled color
+		btn.style.backgroundColor = 'grey'; 
 	}
 	btn.disabled = !isEnabled;
 }
 
 
+// Fonction pour afficher un message d'erreur sous le champ concerné
 
 function showMessageError(input, message) {
 	let parent = input.parentElement;
 	parent.setAttribute('data-error', message);
 	parent.setAttribute('data-error-visible', 'true');
 }
+
+
+// Fonction pour masquer le message d'erreur sous le champ concerné
 
 function hideMessageError(input) {
 	let parent = input.parentElement;
