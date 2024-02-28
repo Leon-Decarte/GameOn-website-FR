@@ -185,9 +185,9 @@ main {
 }
 
 .content {
-  margin: 5% auto;
+  margin: 1% auto;
   width: 100%;
-  height: 95vh;
+  height: 98vh;
   max-width: 500px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
@@ -237,6 +237,7 @@ input {
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
+  display: flex;
 }
 
 .formData[data-error-visible="true"]::after {
@@ -477,7 +478,7 @@ input[data-error]::after {
 }
 
 .hero-headline {
-  font-size: 6rem;
+  font-size: 4.5rem;
   font-weight: normal;
   white-space: nowrap;
 }

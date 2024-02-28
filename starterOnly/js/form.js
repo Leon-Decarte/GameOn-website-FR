@@ -26,7 +26,6 @@ function checkBirthdate() {
 
 	hideMessageError(input);
 	if (input.value === "" || input.value == null || input.value.length != 10) {
-		input.focus();
 		showMessageError(input, 'La date de naissance n\'est pas valide');
 
 		return false;
@@ -106,7 +105,6 @@ function checkInput(inputId, errorMessage) {
 
 	hideMessageError(input);
 	if (input.value === "" || input.value == null || input.value.length <= 2) {
-		input.focus();
 		showMessageError(input, errorMessage);
 
 		return false;
@@ -120,7 +118,6 @@ function isMail(inputId, errorMessage) {
 	const input = document.getElementById(inputId);
 	hideMessageError(input);
 	if (!input.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
-		input.focus();
 		showMessageError(input, errorMessage);
 		return false
 	}
@@ -140,7 +137,6 @@ function quantityValue(inputId, errorMessage) {
 
 	hideMessageError(input);
 	if (input.value === "" || input.value == null) {
-		input.focus();
 		showMessageError(input, errorMessage);
 
 		return false;
